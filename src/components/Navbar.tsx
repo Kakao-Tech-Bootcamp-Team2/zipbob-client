@@ -12,10 +12,10 @@ const NavBar = () => {
   return (
     <nav className={styles.navContainer}>
       <Link
-        to="/"
-        className={`${styles.navItem} ${location.pathname === "/" ? styles.active : ""}`}
+        to="/home"
+        className={`${styles.navItem} ${location.pathname === "/home" ? styles.active : ""}`}
       >
-        <div className={`${styles.iconBack} ${location.pathname === "/" ? styles.active : ""}`}>
+        <div className={`${styles.iconBack} ${location.pathname === "/home" ? styles.active : ""}`}>
           <img src={refriIcon} alt="내 냉장고" className={styles.navIcon} />
         </div>
         <span>내 냉장고</span>
