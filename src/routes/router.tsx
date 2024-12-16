@@ -6,6 +6,8 @@ import Recipes from "../pages/Recipes";
 import Community from "../pages/Community";
 import Bookmark from "../pages/Bookmark";
 import Mypage from "../pages/Mypage";
+import RecipeReviewPage from "../pages/RecipeReviewPage"
+import SplashScreen from "../components/SplashScreen";
 
 export const router = createBrowserRouter([
   {
@@ -13,11 +15,11 @@ export const router = createBrowserRouter([
     element: <DefaultLayout />,
     children: [
       {
-        //path: "/",
-        // element: <App />,
+        path: "/",
+        element: <SplashScreen />,
       },
       {
-        path: "/",                // 메인 페이지 경로
+        path: "/home",                // 메인 페이지 경로
         element: <HomePage />,    // 메인 페이지 컴포넌트
       },
       {
@@ -39,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/mypage",         // 북마크 페이지 경로
         element: <Mypage />,  // 북마크 페이지 컴포넌트
+      },
+      {
+        path: "/review",         // 북마크 페이지 경로
+        element: <RecipeReviewPage />,  // 북마크 페이지 컴포넌트
       },
     ],
   },
