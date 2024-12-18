@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
 *{box-sizing:border-box}
 body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {margin:0;padding:0}
 body, button, input, select, table, textarea {font-size:12px;line-height:16px;color:#202020;font-family:-apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif}
@@ -26,8 +25,17 @@ i {font-style:normal}
 	min-height: 100vh;
 }
 
+@font-face {
+    font-family:"Baloo Bhaina";
+    src: url("/fonts/BalooBhaina2-Bold.ttf") format("truetype"),
+	url("/fonts/BalooBhaina2-Bold.ttf") format("truetype"),}
 
-// 초기 html 설정
+@font-face {
+    font-family:"Pretendard-Medium";
+    src: url("fonts/BM-HANNA.ttf.woff") format("truetype"),
+	url("fonts/BM-HANNA.ttf.woff") format("truetype"),
+}
+
 html {
 	background-color: #D4EBF8;
 	display: flex;
