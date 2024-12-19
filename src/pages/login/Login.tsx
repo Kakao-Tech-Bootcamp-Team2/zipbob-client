@@ -9,17 +9,13 @@ export const Login = () => {
       <S.ButtonConatainer>
         <S.ButtonImage
           onClick={() =>
-            (window.location.href = `${
-              import.meta.env.VITE_BASE_URL
-            }/oauth2/authorization/google`)
+            (window.location.href = `http://backend.zipbob.site/oauth2/authorization/google`)
           }
           src="/images/google.svg"
         />
         <S.ButtonImage
           onClick={() =>
-            (window.location.href = `${
-              import.meta.env.VITE_BASE_URL
-            }/oauth2/authorization/naver`)
+            (window.location.href = `http://backend.zipbob.site//oauth2/authorization/naver`)
           }
           src="/images/naver.svg"
         />
