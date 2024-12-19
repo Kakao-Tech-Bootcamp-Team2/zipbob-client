@@ -37,7 +37,7 @@ i {font-style:normal}
 }
 
 html {
-	background-color: #D4EBF8;
+	background-color: white;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -51,7 +51,7 @@ body {
 	width: 100%;
 	max-width: 520px;
 	overflow-x: hidden;
-    background-color: white;
+	background-color: #f6f8ff;
 	scrollbar-width: none; 
 	-ms-overflow-style: none;
 
