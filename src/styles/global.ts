@@ -32,7 +32,7 @@ i {font-style:normal}
 
 @font-face {
     font-family:"BM-HANNA";
-    src: url("fonts/BM-HANNA.ttf.ttf") format("truetype"),
+    src: url("fonts/BM-HANNA.ttf") format("truetype"),
 }
 
 html {
