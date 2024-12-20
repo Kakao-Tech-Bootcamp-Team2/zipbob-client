@@ -7,6 +7,10 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-evenly;
   background-color: #f6f8ff;
+  background-image: url("/images/background.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
   flex-direction: column;
 `;
 

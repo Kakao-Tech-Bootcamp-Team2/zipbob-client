@@ -4,7 +4,7 @@ export const Login = () => {
     <S.Container>
       <S.LogoBox>
         <S.Logo src="/images/logo.svg" />
-        <S.HeadText>ZipBob</S.HeadText>
+        <S.HeadText>집밥</S.HeadText>
       </S.LogoBox>
       <S.ButtonConatainer>
         <S.ButtonImage

@@ -31,9 +31,8 @@ i {font-style:normal}
 	url("/fonts/BalooBhaina2-Bold.ttf") format("truetype"),}
 
 @font-face {
-    font-family:"Pretendard-Medium";
-    src: url("fonts/BM-HANNA.ttf.woff") format("truetype"),
-	url("fonts/BM-HANNA.ttf.woff") format("truetype"),
+    font-family:"BM-HANNA";
+    src: url("fonts/BM-HANNA.ttf.ttf") format("truetype"),
 }
 
 html {

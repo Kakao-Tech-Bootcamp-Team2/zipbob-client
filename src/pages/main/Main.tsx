@@ -1,9 +1,5 @@
-import { BottomNav } from "../../components/bottomNav/BottomNav";
+// import {} from "../../components/bottomNav/BottomNav";
 
 export const Main = () => {
-  return (
-    <>
-      <BottomNav />
-    </>
-  );
+  return <>{/* <BottomNav /> */}</>;
 };
