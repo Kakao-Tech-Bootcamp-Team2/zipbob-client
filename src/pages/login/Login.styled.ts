@@ -11,6 +11,12 @@ export const Container = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  @media (max-width: 380px) {
+    background-size: cover;
+  }
+  @media (min-width: 450px) {
+    background-size: cover;
+  }
   flex-direction: column;
 `;
 

@@ -5,6 +5,7 @@ import { Splash } from "../pages/splash/Splash";
 import { Main } from "../pages/main/Main";
 import { Test } from "../pages/test/Test";
 import { SignUp } from "../pages/signup/SignUp";
+import { Ingredient } from "../pages/ingredient/Ingredient";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/ingredient",
+        element: <Ingredient />,
       },
     ],
   },

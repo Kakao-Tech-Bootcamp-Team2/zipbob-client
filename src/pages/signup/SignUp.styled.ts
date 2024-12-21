@@ -2,40 +2,13 @@ import styled from "styled-components";
 
 export const Layout = styled.div`
   position: relative;
+  width: 100%;
   min-height: 100vh;
   max-width: 520px;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
-`;
-
-export const SignUpTitle = styled.div`
-  position: absolute;
-  top: 24%;
-  left: 5%;
-  width: 174px;
-  height: 56px;
-  transform: rotate(2deg);
-  border: 3px solid #d0d0d0;
-  background-color: white;
-  color: black;
-  font-family: "BM-HANNA";
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ImgLabel = styled.img`
-  position: absolute;
-  top: -70%;
-  right: -20%;
 `;
 
 export const NickNameContainer = styled.div`
@@ -61,7 +34,7 @@ export const NickNameValidWrapper = styled.div`
 
 export const NickNameInput = styled.input`
   padding: 10px;
-  width: 180px;
+  width: 170px;
   height: 50px;
   color: #c1c1c1;
   background-color: #f6f8ff;

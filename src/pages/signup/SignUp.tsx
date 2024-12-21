@@ -1,12 +1,15 @@
 import * as S from "./SignUp.styled";
+import { Title } from "../../components/title/Title";
 
 export const SignUp = () => {
   return (
     <S.Layout>
-      <S.SignUpTitle>
-        회원가입
-        <S.ImgLabel src="images/tomato.svg" />
-      </S.SignUpTitle>
+      <Title
+        url="images/tomato.svg"
+        title="회원가입"
+        $top="24%"
+        $imageTop="80%"
+      />
       <S.NickNameContainer>
         <S.NickNameValidWrapper>
           <S.NickNameInput placeholder="닉네임 입력" />
