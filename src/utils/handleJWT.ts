@@ -8,7 +8,7 @@ interface UserData {
 
 export const handleParseJwt = (): void => {
   try {
-    const token = import.meta.env.VITE_TEST_TOKEN; // 토큰 가져오기
+    const token = localStorage.getItem("ACCESS_TOKEN") || ""; // 토큰 가져오기
     console.log("Token:", token);
 
     // Base64 URL 디코딩

@@ -6,15 +6,13 @@ export const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  // TODO: - accessToken 연결
-  // const accessToken = localStorage.getItem("accessToken");
-  const accessToken = import.meta.env.VITE_TEST_TOKEN;
+  const accessToken = localStorage.getItem("ACCESS_TOKEN");
 
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
   } else {
-    config.headers.Refresh = `Bearer ${import.meta.env.VITE_TEST_REFRESH}`;
-    // instance.patch("/auth/reissue");
+    config.headers.Refresh = localStorage.getItem("REFRESH_TOKEN");
+    instance.patch("/auth/reissue");
   }
 
   return config;

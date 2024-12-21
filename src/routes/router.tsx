@@ -6,6 +6,7 @@ import { Main } from "../pages/main/Main";
 import { Test } from "../pages/test/Test";
 import { SignUp } from "../pages/signup/SignUp";
 import { Ingredient } from "../pages/ingredient/Ingredient";
+import { Home } from "../pages/home/Home";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/ingredient",
         element: <Ingredient />,
+      },
+      {
+        path: "/home",
+        element: <Home />,
       },
     ],
   },

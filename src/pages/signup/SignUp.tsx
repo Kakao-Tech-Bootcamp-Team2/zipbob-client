@@ -1,7 +1,9 @@
 import * as S from "./SignUp.styled";
 import { Title } from "../../components/title/Title";
+import { useExtractTokens } from "../../hooks/useExtractTokens";
 
 export const SignUp = () => {
+  useExtractTokens();
   return (
     <S.Layout>
       <Title
