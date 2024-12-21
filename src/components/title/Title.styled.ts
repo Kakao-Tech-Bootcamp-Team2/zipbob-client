@@ -6,6 +6,7 @@ interface TitleWrapperProps {
 
 interface ImageProps {
   $imageTop?: string;
+  $right?: string;
 }
 
 export const TitleWrapper = styled.div<TitleWrapperProps>`
@@ -30,6 +31,6 @@ export const TitleWrapper = styled.div<TitleWrapperProps>`
 
 export const ImgLabel = styled.img<ImageProps>`
   position: absolute;
-  top: ${({ $imageTop }) => $imageTop || "0px"};
-  right: -20%;
+  top: ${({ $imageTop }) => `calc(${$imageTop || "0px"})`};
+  right: ${({ $right }) => `calc(${$right || "-20%"})`};
 `;

@@ -8,7 +8,8 @@ export const Ingredient = () => {
         url="images/egg.svg"
         title="식재료 관리"
         $top="5%"
-        $imageTop="70%"
+        $imageTop="-90%"
+        $right="-30%"
       />
     </S.Layout>
   );

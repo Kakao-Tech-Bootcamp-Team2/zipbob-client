@@ -8,7 +8,7 @@ export const SignUp = () => {
         url="images/tomato.svg"
         title="회원가입"
         $top="24%"
-        $imageTop="80%"
+        $imageTop="-80%"
       />
       <S.NickNameContainer>
         <S.NickNameValidWrapper>
