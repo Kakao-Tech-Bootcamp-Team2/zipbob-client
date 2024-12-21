@@ -9,7 +9,7 @@ import { instance } from "./instance";
 
 // 최초 access token 받는 부분은 소셜로그인 이후 -> 그 이후 해당 OAuth 추가 가입인 해당 API 호출 -> 이후에 냉장고 생성까지 연쇄적으로 진행
 
-export const patchNewUser = async (nickname: string) => {
+export const patchNewUser = async (nickname: string, callback: () => void) => {
   try {
     const res = await instance.patch("/members/oauth2/join", {
       nickname,
@@ -17,6 +17,7 @@ export const patchNewUser = async (nickname: string) => {
 
     console.log(res);
     localStorage.setItem("nickname", nickname);
+    callback();
   } catch (err) {
     console.log(err);
   }
@@ -65,5 +66,6 @@ export const getNicknameStatus = async (nickname: string) => {
     // boolean
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };

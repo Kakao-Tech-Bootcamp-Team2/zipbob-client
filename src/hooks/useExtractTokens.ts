@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useExtractTokens = () => {
+export const useExtractTokens = (location: string) => {
   const [isStored, setIsStored] = useState<boolean>(false);
 
   useEffect(() => {
@@ -8,10 +8,16 @@ export const useExtractTokens = () => {
       try {
         // 현재 브라우저 URL의 쿼리 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
-
+        let accessToken;
+        let refreshToken;
         // access_token과 refresh_token 추출
-        const accessToken = urlParams.get("access_token");
-        const refreshToken = urlParams.get("refresh_token");
+        if (location === "home") {
+          accessToken = urlParams.get("accessToken");
+          refreshToken = urlParams.get("refreshToken");
+        } else {
+          accessToken = urlParams.get("access_token");
+          refreshToken = urlParams.get("refresh_token");
+        }
 
         // 둘 중 하나라도 존재하지 않으면 에러 처리
         if (!accessToken || !refreshToken) {

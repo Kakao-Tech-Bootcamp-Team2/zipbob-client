@@ -3,7 +3,6 @@ import { DefaultLayout } from "../layout/defaultLayout";
 import { Login } from "../pages/login/Login";
 import { Splash } from "../pages/splash/Splash";
 import { Main } from "../pages/main/Main";
-import { Test } from "../pages/test/Test";
 import { SignUp } from "../pages/signup/SignUp";
 import { Ingredient } from "../pages/ingredient/Ingredient";
 import { Home } from "../pages/home/Home";
@@ -24,10 +23,6 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
-      },
-      {
-        path: "/test",
-        element: <Test />,
       },
       {
         path: "/signup",
