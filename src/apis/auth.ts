@@ -62,10 +62,8 @@ export const getUserInfo = async () => {
 export const getNicknameStatus = async (nickname: string) => {
   try {
     const res = await instance.get(`/members/nickname-check/${nickname}`);
-    console.log(res);
-    // boolean
+    return res;
   } catch (err) {
-    console.log(err);
-    throw err;
+    return err;
   }
 };

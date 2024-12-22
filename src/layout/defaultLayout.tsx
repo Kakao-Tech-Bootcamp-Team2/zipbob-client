@@ -5,6 +5,7 @@ const Layout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
 `;
 
 export const DefaultLayout = () => {
