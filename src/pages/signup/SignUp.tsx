@@ -9,7 +9,7 @@ import { getNicknameStatus } from "../../apis/auth";
 export const SignUp = () => {
   useExtractTokens("signUp");
   const [nickname, setNickname] = useState<string>("");
-  const [isValid, setIsValid] = useState<boolean>(false);
+  const [isValid, _] = useState<boolean>(false);
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
