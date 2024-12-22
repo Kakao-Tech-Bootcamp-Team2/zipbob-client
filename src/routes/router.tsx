@@ -40,6 +40,10 @@ export const router = createBrowserRouter([
         path: "/error",
         element: <Home />,
       },
+      {
+        path: "/ingredient-select",
+        element: <Home />,
+      },
     ],
   },
 ]);

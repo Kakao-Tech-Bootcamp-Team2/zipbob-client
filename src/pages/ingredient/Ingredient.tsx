@@ -3,8 +3,10 @@ import { Title } from "../../components/title/Title";
 import { SelectButton } from "../../components/selectButton/SelectButton";
 import { CATEGORY_TITLE } from "../../constants/category";
 import { IngredientCategory } from "./_components/CategoryWrapper";
+import { useNavigate } from "react-router-dom";
 
 export const Ingredient = () => {
+  const navigate = useNavigate();
   return (
     <S.Layout>
       <Title
@@ -16,7 +18,7 @@ export const Ingredient = () => {
       />
       <SelectButton
         title={"선택 완료"}
-        onClickButton={() => console.log("test")}
+        onClickButton={() => navigate("/ingredient-select")}
       />
       <S.CategoryContainer>
         {CATEGORY_TITLE.map(({ key, title }, index) => (

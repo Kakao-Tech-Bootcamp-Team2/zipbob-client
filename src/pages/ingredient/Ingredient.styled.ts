@@ -8,6 +8,7 @@ export const Layout = styled.div`
   /* display: flex;
   flex-direction: column;
   align-items: center; */
+  margin-bottom: 150px;
 `;
 
 export const CategoryContainer = styled.div`
