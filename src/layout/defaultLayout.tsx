@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { useLocation } from "react-router-dom";
 import { GlobalBottomNavigation } from "../components/globalBottomNavigation/GlobalBottomNavigation";
 
 const Layout = styled.div`
@@ -10,10 +11,11 @@ const Layout = styled.div`
 `;
 
 export const DefaultLayout = () => {
+  const location = useLocation();
   return (
     <Layout>
       <Outlet />
-      <GlobalBottomNavigation />
+      {location.pathname !== "/login" && <GlobalBottomNavigation />}
     </Layout>
   );
 };
