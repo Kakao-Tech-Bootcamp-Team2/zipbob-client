@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { DatePicker } from "../../../components/datePicker/DatePicker";
+import { useIngredientStore } from "../../../store/ingredientStore";
 
 const CardContainer = styled.div`
   display: flex;
@@ -49,8 +50,18 @@ interface SelectCardProps {
 }
 
 export const SelectCard = ({ title }: SelectCardProps) => {
-  const [mount, setMount] = useState<number>(1);
   const [startDate, setStartDate] = useState(new Date());
+  const { quantities, setQuantity, setExpiredDate } = useIngredientStore();
+
+  const currentQuantity = quantities[title] || 1;
+
+  // 한국 시간으로 포맷하는 함수 사용
+  const handleDateChange = (newDate: Date) => {
+    const koreanDate = toKoreanDate(newDate); // 한국 시간으로 변환
+    setStartDate(newDate);
+    setExpiredDate(title, koreanDate); // 스토어에 저장
+  };
+
   return (
     <div
       style={{
@@ -77,11 +88,16 @@ export const SelectCard = ({ title }: SelectCardProps) => {
           <AmountContainer>
             <SubTitle>용량</SubTitle>
             <CheckZone>
-              <button disabled={mount < 2} onClick={() => setMount(mount - 1)}>
+              <button
+                disabled={currentQuantity < 2}
+                onClick={() => setQuantity(title, currentQuantity - 1)}
+              >
                 -
               </button>
-              <div>{`${mount}L/g/개`}</div>
-              <button onClick={() => setMount(mount + 1)}>+</button>
+              <div>{`${currentQuantity}L/g/개`}</div>
+              <button onClick={() => setQuantity(title, currentQuantity + 1)}>
+                +
+              </button>
             </CheckZone>
           </AmountContainer>
         </div>
@@ -91,8 +107,28 @@ export const SelectCard = ({ title }: SelectCardProps) => {
           display: "flex",
         }}
       >
-        <DatePicker startDate={startDate} setStartDate={setStartDate} />
+        <DatePicker startDate={startDate} setStartDate={handleDateChange} />
       </div>
+      <div
+        style={{
+          marginTop: "0.5rem",
+          textAlign: "center",
+          fontFamily: "BM-HANNA",
+          fontSize: "0.875rem",
+        }}
+      ></div>
     </div>
   );
+};
+
+// 한국 시간으로 변환하는 함수
+const toKoreanDate = (date: Date): string => {
+  const offset = date.getTimezoneOffset() * 60000; // 밀리초 단위 오프셋 계산
+  const koreanTime = new Date(date.getTime() + offset + 9 * 60 * 60000); // 한국 시간으로 변환
+
+  const year = koreanTime.getFullYear();
+  const month = String(koreanTime.getMonth() + 1).padStart(2, "0");
+  const day = String(koreanTime.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`; // YYYY-MM-DD 형식 반환
 };

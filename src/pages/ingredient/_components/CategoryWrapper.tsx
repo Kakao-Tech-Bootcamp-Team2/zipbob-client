@@ -66,10 +66,10 @@ export const IngredientCategory = ({ title, categoryKey }: CategoryProps) => {
         {Object.values(CATEGORY[categoryKey]).map((ingredient, index) => (
           <IngredientItem
             key={index}
-            $isSelected={selectedItems.includes(ingredient)} // 선택된 상태 확인
-            onClick={() => toggleItem(ingredient)} // 선택/해제 동작
+            $isSelected={selectedItems.includes(ingredient.name)} // 선택 여부 확인
+            onClick={() => toggleItem(categoryKey, ingredient.name)} // categoryKey와 ingredient.name 전달
           >
-            {ingredient}
+            {ingredient.name}
           </IngredientItem>
         ))}
       </IngredientWrapper>

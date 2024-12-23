@@ -15,7 +15,9 @@ export const DefaultLayout = () => {
   return (
     <Layout>
       <Outlet />
-      {location.pathname !== "/login" && <GlobalBottomNavigation />}
+      {location.pathname !== "/login" && location.pathname !== "/signup" && (
+        <GlobalBottomNavigation />
+      )}{" "}
     </Layout>
   );
 };

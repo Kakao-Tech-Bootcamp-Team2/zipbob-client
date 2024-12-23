@@ -4,7 +4,6 @@ import styled from "styled-components";
 const PickerWrapper = styled.div`
   display: flex;
   font-family: "BM-HANNA";
-
   margin-top: 0.5rem;
   justify-content: end;
   align-items: center;
@@ -67,23 +66,29 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     label: `${i + 1}일`,
   }));
 
+  // 한국 시간으로 변환
+  const toKoreanTime = (date: Date): Date => {
+    const offset = date.getTimezoneOffset() * 60000; // 밀리초 단위 오프셋 계산
+    return new Date(date.getTime() + offset + 9 * 60 * 60000); // 한국 시간(+9)
+  };
+
   const handleYearChange = (selectedOption: SelectOption | null) => {
     if (!selectedOption) return;
-    const newDate = new Date(startDate);
+    const newDate = toKoreanTime(new Date(startDate));
     newDate.setFullYear(selectedOption.value);
     setStartDate(newDate);
   };
 
   const handleMonthChange = (selectedOption: SelectOption | null) => {
     if (!selectedOption) return;
-    const newDate = new Date(startDate);
+    const newDate = toKoreanTime(new Date(startDate));
     newDate.setMonth(selectedOption.value - 1);
     setStartDate(newDate);
   };
 
   const handleDayChange = (selectedOption: SelectOption | null) => {
     if (!selectedOption) return;
-    const newDate = new Date(startDate);
+    const newDate = toKoreanTime(new Date(startDate));
     newDate.setDate(selectedOption.value);
     setStartDate(newDate);
   };

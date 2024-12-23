@@ -9,6 +9,11 @@ import { instance } from "./instance";
 
 // 최초 access token 받는 부분은 소셜로그인 이후 -> 그 이후 해당 OAuth 추가 가입인 해당 API 호출 -> 이후에 냉장고 생성까지 연쇄적으로 진행
 
+interface NicknameStatusResponse {
+  status: string;
+  nicknameAvailable: boolean;
+}
+
 export const patchNewUser = async (nickname: string, callback: () => void) => {
   try {
     const res = await instance.patch("/members/oauth2/join", {
@@ -59,11 +64,15 @@ export const getUserInfo = async () => {
 };
 
 // 가입 시! -> true / false에 따라 버튼 상태 관리할거니까 커스텀 훅으로 빼도 좋을듯
-export const getNicknameStatus = async (nickname: string) => {
+export const getNicknameStatus = async (
+  nickname: string
+): Promise<NicknameStatusResponse> => {
   try {
-    const res = await instance.get(`/members/nickname-check/${nickname}`);
-    return res;
+    const res = await instance.get<NicknameStatusResponse>(
+      `/members/nickname-check/${nickname}`
+    );
+    return res.data;
   } catch (err) {
-    return err;
+    return err as any; // 타입 오류를 방지
   }
 };

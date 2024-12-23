@@ -45,6 +45,14 @@ export const router = createBrowserRouter([
         path: "/ingredient/2",
         element: <Select />,
       },
+      {
+        path: "/myinfo",
+        element: <Home />,
+      },
+      {
+        path: "/recipe",
+        element: <Home />,
+      },
     ],
   },
 ]);
