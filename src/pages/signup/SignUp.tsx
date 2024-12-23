@@ -9,17 +9,11 @@ import { getNicknameStatus, patchNewUser } from "../../apis/auth";
 export const SignUp = () => {
   useExtractTokens("signUp");
   const [nickname, setNickname] = useState<string>("");
-  const [isValid, setIsValid] = useState<boolean>(false);
-  useExtractTokens("home");
 
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
-  const isValidNickname = async () => {
-    const result = await getNicknameStatus(nickname);
-    console.log(result);
-    setIsValid(result.isValid);
-  };
+
   return (
     <S.Layout>
       <Title
@@ -36,16 +30,15 @@ export const SignUp = () => {
             onChange={handleNickname}
             placeholder="닉네임 입력"
           />
-          <S.NickNameValidCheckBtn onClick={() => isValidNickname()}>
+          <S.NickNameValidCheckBtn onClick={() => getNicknameStatus(nickname)}>
             중복 확인
           </S.NickNameValidCheckBtn>
         </S.NickNameValidWrapper>
       </S.NickNameContainer>
       <S.StartButton
-        disabled={!isValid}
         onClick={() => {
-          const nickname = localStorage.getItem("nickname");
-          if (nickname) {
+          const nick = localStorage.getItem("nickname");
+          if (nick) {
             patchNewUser(nickname);
           } else {
             alert("닉네임이 설정되지 않았습니다."); // null 처리
