@@ -4,18 +4,21 @@ import { useState } from "react";
 
 import { Title } from "../../components/title/Title";
 import { useExtractTokens } from "../../hooks/useExtractTokens";
-import { getNicknameStatus } from "../../apis/auth";
+import { getNicknameStatus, patchNewUser } from "../../apis/auth";
 
 export const SignUp = () => {
   useExtractTokens("signUp");
   const [nickname, setNickname] = useState<string>("");
-  const [isValid, _] = useState<boolean>(false);
+  const [isValid, setIsValid] = useState<boolean>(false);
+  useExtractTokens("home");
+
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
   const isValidNickname = async () => {
     const result = await getNicknameStatus(nickname);
     console.log(result);
+    setIsValid(result.isValid);
   };
   return (
     <S.Layout>
@@ -38,7 +41,19 @@ export const SignUp = () => {
           </S.NickNameValidCheckBtn>
         </S.NickNameValidWrapper>
       </S.NickNameContainer>
-      <S.StartButton disabled={!isValid}>시작하기</S.StartButton>
+      <S.StartButton
+        disabled={!isValid}
+        onClick={() => {
+          const nickname = localStorage.getItem("nickname");
+          if (nickname) {
+            patchNewUser(nickname);
+          } else {
+            alert("닉네임이 설정되지 않았습니다."); // null 처리
+          }
+        }}
+      >
+        시작하기
+      </S.StartButton>
     </S.Layout>
   );
 };

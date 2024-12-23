@@ -1,4 +1,6 @@
+import { handleParseJwt } from "../utils/handleJWT";
 import { instance } from "./instance";
+import { postRefrigerators } from "./refrigerators";
 
 // interface NewUserResponse {
 //   email: string;
@@ -10,19 +12,18 @@ import { instance } from "./instance";
 // 최초 access token 받는 부분은 소셜로그인 이후 -> 그 이후 해당 OAuth 추가 가입인 해당 API 호출 -> 이후에 냉장고 생성까지 연쇄적으로 진행
 
 interface NicknameStatusResponse {
-  status: string;
-  nicknameAvailable: boolean;
+  isValid: boolean;
 }
-
-export const patchNewUser = async (nickname: string, callback: () => void) => {
+export const patchNewUser = async (nickname: string) => {
   try {
     const res = await instance.patch("/members/oauth2/join", {
       nickname,
     });
 
     console.log(res);
-    localStorage.setItem("nickname", nickname);
-    callback();
+    handleParseJwt();
+    await postRefrigerators();
+    alert(`등록완료 : ${nickname}`);
   } catch (err) {
     console.log(err);
   }
@@ -68,6 +69,7 @@ export const getNicknameStatus = async (
   nickname: string
 ): Promise<NicknameStatusResponse> => {
   try {
+    localStorage.setItem("nickname", nickname);
     const res = await instance.get<NicknameStatusResponse>(
       `/members/nickname-check/${nickname}`
     );
