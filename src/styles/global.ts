@@ -30,9 +30,11 @@ i {font-style:normal}
     src: url("/fonts/BalooBhaina2-Bold.ttf") format("truetype"),
 	url("/fonts/BalooBhaina2-Bold.ttf") format("truetype"),}
 
+
+
 @font-face {
-    font-family:"BM-HANNA";
-    src: url("fonts/BM-HANNA.ttf") format("truetype"),
+  font-family: "BM-HANNA";
+  src: url("/fonts/BM-HANNA.ttf") format("truetype");
 }
 
 html {

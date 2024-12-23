@@ -11,6 +11,7 @@ export const useIngredientStore = create<IngredientStore>((set) => ({
     set((state) => {
       // 아이템 선택/해제 로직
       const isSelected = state.selectedItems.includes(ingredient);
+      console.log(ingredient, state.selectedItems);
       return {
         selectedItems: isSelected
           ? state.selectedItems.filter((item) => item !== ingredient) // 제거

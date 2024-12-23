@@ -16,8 +16,10 @@ export const GlobalBottomNavigation = () => {
       />
       <S.NavigationItem
         src="/images/ingredientItem.svg"
-        $isActive={isActive("/ingredient")} // "/ingredient" 경로 활성화
-        onClick={() => navigate("/ingredient")}
+        $isActive={["/ingredient/1", "/ingredient/2"].some((path) =>
+          isActive(path)
+        )}
+        onClick={() => navigate("/ingredient/1")}
       />
       <S.NavigationItem
         src="/images/recipeItem.svg"

@@ -6,6 +6,7 @@ import { Main } from "../pages/main/Main";
 import { SignUp } from "../pages/signup/SignUp";
 import { Ingredient } from "../pages/ingredient/Ingredient";
 import { Home } from "../pages/home/Home";
+import { Select } from "../pages/ingredient/Select";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/ingredient",
+        path: "/ingredient/1",
         element: <Ingredient />,
       },
       {
@@ -41,8 +42,8 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/ingredient-select",
-        element: <Home />,
+        path: "/ingredient/2",
+        element: <Select />,
       },
     ],
   },

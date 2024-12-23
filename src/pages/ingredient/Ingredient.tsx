@@ -10,7 +10,7 @@ export const Ingredient = () => {
   return (
     <S.Layout>
       <Title
-        url="images/egg.svg"
+        url="/images/egg.svg"
         title="식재료 관리"
         $top="2%"
         $imageTop="-90%"
@@ -18,7 +18,7 @@ export const Ingredient = () => {
       />
       <SelectButton
         title={"선택 완료"}
-        onClickButton={() => navigate("/ingredient-select")}
+        onClickButton={() => navigate("/ingredient/2")}
       />
       <S.CategoryContainer>
         {CATEGORY_TITLE.map(({ key, title }, index) => (
