@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { handleParseJwt } from "../utils/handleJWT";
 
 export const useExtractTokens = (location: string) => {
   const [isStored, setIsStored] = useState<boolean>(false);
@@ -27,6 +28,7 @@ export const useExtractTokens = (location: string) => {
         // localStorage에 저장
         localStorage.setItem("ACCESS_TOKEN", accessToken);
         localStorage.setItem("REFRESH_TOKEN", refreshToken);
+        handleParseJwt();
 
         console.log("Tokens successfully stored in localStorage.");
         setIsStored(true); // 저장 성공

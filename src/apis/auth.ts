@@ -1,4 +1,3 @@
-import { handleParseJwt } from "../utils/handleJWT";
 import { instance } from "./instance";
 import { postRefrigerators } from "./refrigerators";
 
@@ -21,9 +20,9 @@ export const patchNewUser = async (nickname: string) => {
     });
 
     console.log(res);
-    handleParseJwt();
     await postRefrigerators();
     alert(`등록완료 : ${nickname}`);
+    window.location.href = "/";
   } catch (err) {
     console.log(err);
   }

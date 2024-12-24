@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { GlobalBottomNavigation } from "../components/globalBottomNavigation/GlobalBottomNavigation";
+import { useEffect } from "react";
 
 const Layout = styled.div`
   display: flex;
@@ -11,7 +12,13 @@ const Layout = styled.div`
 `;
 
 export const DefaultLayout = () => {
+  const navigate = useNavigate();
   const location = useLocation();
+  useEffect(() => {
+    if (!localStorage.getItem("ACCESS_TOKEN")) {
+      navigate("/login");
+    }
+  }, []);
   return (
     <Layout>
       <Outlet />
