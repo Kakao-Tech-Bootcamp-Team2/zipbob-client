@@ -59,7 +59,7 @@ export const deleteUser = async () => {
 
 export const getUserInfo = async () => {
   try {
-    const res = await instance.get("/members/myinfo");
+    const res = await instance.get("/members/myInfo");
     console.log(res);
   } catch (err) {
     console.log(err);

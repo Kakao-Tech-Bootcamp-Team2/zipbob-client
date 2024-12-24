@@ -1,13 +1,13 @@
 import * as S from "./Myinfo.styled";
 import { Title } from "../../components/title/Title";
 
-// import { useEffect } from "react";
-// import { getUserInfo } from "../../apis/auth";
+import { useEffect } from "react";
+import { getUserInfo } from "../../apis/auth";
 
 export const MyInfo = () => {
-  // useEffect(() => {
-  //   getUserInfo();
-  // }, []);
+  useEffect(() => {
+    getUserInfo();
+  }, []);
   return (
     <S.Layout>
       <Title url="" title="내 정보" $top="5%" $imageTop="" $right="-30%" />
