@@ -7,7 +7,7 @@ import { useExtractTokens } from "../../hooks/useExtractTokens";
 import { getNicknameStatus, patchNewUser } from "../../apis/auth";
 
 export const SignUp = () => {
-  useExtractTokens("signUp");
+  useExtractTokens();
   const [nickname, setNickname] = useState<string>("");
 
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>) => {

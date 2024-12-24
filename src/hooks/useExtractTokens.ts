@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { handleParseJwt } from "../utils/handleJWT";
 
-export const useExtractTokens = (location: string) => {
+export const useExtractTokens = () => {
   const [isStored, setIsStored] = useState<boolean>(false);
 
   useEffect(() => {
@@ -12,13 +12,10 @@ export const useExtractTokens = (location: string) => {
         let accessToken;
         let refreshToken;
         // access_token과 refresh_token 추출
-        if (location === "home") {
-          accessToken = urlParams.get("accessToken");
-          refreshToken = urlParams.get("refreshToken");
-        } else {
-          accessToken = urlParams.get("access_token");
-          refreshToken = urlParams.get("refresh_token");
-        }
+        accessToken =
+          urlParams.get("accessToken") || urlParams.get("access_token");
+        refreshToken =
+          urlParams.get("refreshToken") || urlParams.get("refresh_token");
 
         // 둘 중 하나라도 존재하지 않으면 에러 처리
         if (!accessToken || !refreshToken) {
