@@ -2,7 +2,7 @@ import * as S from "./Myinfo.styled";
 import { Title } from "../../components/title/Title";
 
 import { useEffect } from "react";
-import { getUserInfo } from "../../apis/auth";
+import { getUserInfo, patchLogout } from "../../apis/auth";
 
 export const MyInfo = () => {
   useEffect(() => {
@@ -15,7 +15,7 @@ export const MyInfo = () => {
         <S.decofri src="/images/fri.svg" />
         <S.TextZone>{localStorage.getItem("nickname") || "test"}</S.TextZone>
         <S.TextZone>{localStorage.getItem("email") || "test"}</S.TextZone>
-        <S.ModifyButton>수정하기</S.ModifyButton>
+        <S.ModifyButton onClick={() => patchLogout}>로그아웃</S.ModifyButton>
       </S.InfoWrapper>
     </S.Layout>
   );

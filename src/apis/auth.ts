@@ -85,3 +85,10 @@ export const getNicknameStatus = async (
     return err as any; // 타입 오류를 방지
   }
 };
+
+export const patchLogout = async (nickname: string) => {
+  const res = await instance.patch(`/auth/logout`, {
+    nickname,
+  });
+  console.log(res);
+};
