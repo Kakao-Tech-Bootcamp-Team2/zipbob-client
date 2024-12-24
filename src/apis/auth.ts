@@ -72,7 +72,7 @@ export const getNicknameStatus = async (
     const res = await instance.get<NicknameStatusResponse>(
       `/members/nickname-check/${nickname}`
     );
-    if (res.data) {
+    if (!res.data) {
       alert("이용가능합니다!");
       console.log(res.data);
     }
