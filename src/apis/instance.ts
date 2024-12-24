@@ -1,114 +1,94 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
+// Axios 인스턴스 생성
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  withCredentials: true, //크로스 도메인 요청 시 쿠키, HTTP 인증 및 클라이언트 SSL 인증서를 사용하도록 허용한다.
+  withCredentials: true, // 쿠키, 인증 정보 허용
 });
 
-instance.interceptors.request.use((config) => {
-  const accessToken = localStorage.getItem("ACCESS_TOKEN");
+// 새로운 Access Token 요청 함수
+const refreshAccessToken = async (): Promise<string | null> => {
+  try {
+    const refreshToken = localStorage.getItem("REFRESH_TOKEN");
+    if (!refreshToken) {
+      throw new Error("Refresh Token이 없습니다.");
+    }
 
-  if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
-  } else {
-    config.headers.Refresh = localStorage.getItem("REFRESH_TOKEN");
-    instance.patch("/auth/reissue");
+    const response = await axios.patch(
+      `${import.meta.env.VITE_BASE_URL}/auth/reissue`,
+      {},
+      {
+        headers: {
+          Refresh: refreshToken,
+        },
+        withCredentials: true, // 쿠키 포함
+      }
+    );
+
+    const { accessToken, refreshToken: newRefreshToken } = response.data;
+
+    // 새 토큰 저장
+    if (accessToken) {
+      localStorage.setItem("ACCESS_TOKEN", accessToken);
+    }
+
+    if (newRefreshToken) {
+      localStorage.setItem("REFRESH_TOKEN", newRefreshToken);
+    }
+
+    return accessToken || null;
+  } catch (error) {
+    console.error("Access Token 갱신 실패:", error);
+    return null;
   }
+};
 
-  return config;
-  // email, id, role, nickname 리액트라이브러리로 가져오기
-});
+// 요청 인터셉터
+instance.interceptors.request.use(
+  (config) => {
+    const accessToken = localStorage.getItem("ACCESS_TOKEN");
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
 
-// export interface BaseDTO<T> {
-//   status: string;
-//   code: number;
-//   data: T;
-//   message: string;
-// }
+// 응답 인터셉터
+instance.interceptors.response.use(
+  (response) => response, // 성공적인 응답은 그대로 반환
+  async (error: AxiosError) => {
+    const originalRequest = error.config as AxiosRequestConfig & {
+      _retry?: boolean;
+    };
 
-// export interface EmptyDTO {
-//   status: string;
-//   code: number;
-//   message: string;
-// }
+    // originalRequest가 존재하지 않으면 에러 반환
+    if (!originalRequest) {
+      return Promise.reject(error);
+    }
 
-// //get
-// export const getResponse = async <T>(url: string): Promise<T | null> => {
-//   try {
-//     const response = await instance.get<BaseDTO<T>>(url);
+    // 401 Unauthorized 에러 처리
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry // 무한 반복 방지
+    ) {
+      originalRequest._retry = true; // 재시도 플래그 설정
 
-//     return response.data.data;
-//   } catch (error) {
-//     const axiosError = error as AxiosError;
-//     if (axiosError.status == 401) {
-//       // 로그아웃 처리하기
-//       localStorage.removeItem("accessToken");
-//       localStorage.removeItem("refreshToken");
-//       history.go(0);
-//     }
-//     return null;
-//   }
-// };
+      const newAccessToken = await refreshAccessToken();
+      if (newAccessToken) {
+        originalRequest.headers = {
+          ...originalRequest.headers,
+          Authorization: `Bearer ${newAccessToken}`,
+        };
+        return instance(originalRequest); // 원래 요청 재시도
+      } else {
+        console.error("새로운 Access Token을 가져오지 못했습니다.");
+        localStorage.clear(); // 모든 저장된 정보 삭제
+        window.location.href = "/login"; // 로그인 페이지로 리디렉션
+      }
+    }
 
-// export const deleteResponse = async (url: string): Promise<EmptyDTO | null> => {
-//   try {
-//     const response = await instance.post<BaseDTO<EmptyDTO>>(url);
-
-//     return handleResponse(response.data);
-//   } catch (error) {
-//     return null;
-//   }
-// };
-
-// export const postResponseNoData = async (
-//   url: string
-// ): Promise<EmptyDTO | null> => {
-//   try {
-//     const response = await instance.post<BaseDTO<EmptyDTO>>(url, {
-//       headers: {
-//         Authorization: `Bearer `,
-//       },
-//     });
-
-//     return handleResponse(response.data);
-//   } catch (error) {
-//     return null;
-//   }
-// };
-
-// //post
-// export const postResponse = async <T>(
-//   url: string,
-//   body: T
-// ): Promise<T | null> => {
-//   try {
-//     const response = await instance.post<BaseDTO<T>>(url, body);
-
-//     const data = response.data.data;
-//     return data;
-//   } catch (error) {
-//     return null;
-//   }
-// };
-
-// // 공통 응답 처리 함수
-// const handleResponse = <T>(response: BaseDTO<T>): EmptyDTO => {
-//   return {
-//     status: response.status,
-//     message: response.message,
-//     code: response.code,
-//   };
-// };
-
-// export const postResponseNew = async <TRequest, TResponse>(
-//   url: string,
-//   data: TRequest
-// ): Promise<TResponse | null> => {
-//   try {
-//     const response = await instance.post(url, data);
-
-//     return response.data;
-//   } catch (error) {
-//     return null;
-//   }
-// };
+    return Promise.reject(error); // 다른 에러는 그대로 반환
+  }
+);

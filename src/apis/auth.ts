@@ -92,3 +92,16 @@ export const patchLogout = async (nickname: string) => {
   });
   console.log(res);
 };
+
+// export const patchNewAccessToken = async (token: string) => {
+//   const res = await instance.patch(
+//     "/auth/reissue",
+//     {},
+//     {
+//       headers: {
+//         Refresh: localStorage.getItem("REFRESH_TOKEN"),
+//       },
+//     }
+//   );
+//   console.log(res);
+// };

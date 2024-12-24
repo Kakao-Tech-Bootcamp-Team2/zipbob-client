@@ -39,6 +39,7 @@ export const ErrorMsg = styled.p`
 
 export const Error = () => {
   const navigate = useNavigate();
+
   return (
     <Layout>
       <ErrorText>ERROR</ErrorText>
