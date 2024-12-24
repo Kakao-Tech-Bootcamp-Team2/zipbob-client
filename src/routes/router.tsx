@@ -8,11 +8,13 @@ import { Ingredient } from "../pages/ingredient/Ingredient";
 import { Home } from "../pages/home/Home";
 import { Select } from "../pages/ingredient/Select";
 import { MyInfo } from "../pages/myinfo/Myinfo";
+import { Error } from "../pages/error/Error";
 
 export const router = createBrowserRouter([
   {
     path: "",
     element: <DefaultLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
@@ -36,10 +38,6 @@ export const router = createBrowserRouter([
       },
       {
         path: "/home",
-        element: <Home />,
-      },
-      {
-        path: "/error",
         element: <Home />,
       },
       {
