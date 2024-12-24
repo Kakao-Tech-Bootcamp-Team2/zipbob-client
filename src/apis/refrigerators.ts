@@ -6,6 +6,7 @@ export const postRefrigerators = async () => {
       memberId: parseInt(localStorage.getItem("memberId") || ""),
     });
     console.log(response);
+    window.location.href = "/"; // 또는 useNavigate 사용
   } catch (err) {
     console.log(err);
   }

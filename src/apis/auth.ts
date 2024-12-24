@@ -23,9 +23,6 @@ export const patchNewUser = async (nickname: string) => {
 
     // 냉장고 데이터 전송
     await postRefrigerators();
-
-    // 성공 시 홈으로 이동
-    window.location.href = "/"; // 또는 useNavigate 사용
   } catch (err) {
     console.error("Error while patching new user:", err);
 
@@ -79,7 +76,9 @@ export const getNicknameStatus = async (
     );
     if (!res.data) {
       localStorage.setItem("nickname", nickname);
-      alert("이용가능합니다!");
+      alert("사용 가능한 닉네임입니다!");
+    } else {
+      alert("사용 중인 닉네임입니다. 다시 확인해주세요!");
     }
     return res.data;
   } catch (err) {

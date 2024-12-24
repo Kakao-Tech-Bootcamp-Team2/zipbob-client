@@ -7,6 +7,7 @@ import { SignUp } from "../pages/signup/SignUp";
 import { Ingredient } from "../pages/ingredient/Ingredient";
 import { Home } from "../pages/home/Home";
 import { Select } from "../pages/ingredient/Select";
+import { MyInfo } from "../pages/myinfo/Myinfo";
 
 export const router = createBrowserRouter([
   {
@@ -47,7 +48,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myinfo",
-        element: <Home />,
+        element: <MyInfo />,
       },
       {
         path: "/recipe",
