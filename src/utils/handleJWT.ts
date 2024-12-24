@@ -8,8 +8,14 @@ interface UserData {
 
 export const handleParseJwt = (): void => {
   try {
-    const token = localStorage.getItem("ACCESS_TOKEN") || ""; // 토큰 가져오기
+    // ACCESS_TOKEN 가져오기
+    const token = localStorage.getItem("ACCESS_TOKEN") || "";
     console.log("Token:", token);
+
+    if (!token) {
+      console.error("No ACCESS_TOKEN found in localStorage.");
+      return;
+    }
 
     // Base64 URL 디코딩
     const base64Url = token.split(".")[1];
@@ -29,10 +35,21 @@ export const handleParseJwt = (): void => {
     const data: UserData = JSON.parse(jsonPayload);
     console.log("Parsed Data:", data);
 
-    // memberId 저장
+    // memberId와 email 저장
     localStorage.setItem("memberId", data.memberId.toString());
     console.log("Stored memberId:", data.memberId);
     localStorage.setItem("email", data.sub);
+    console.log("Stored email:", data.sub);
+
+    // nickname 저장 (URL에서 추출)
+    const params = new URLSearchParams(window.location.search);
+    const nickname = params.get("nickname");
+    if (nickname) {
+      localStorage.setItem("nickname", nickname);
+      console.log("Stored nickname:", nickname);
+    } else {
+      console.warn("No nickname found in the URL.");
+    }
   } catch (error) {
     console.error("Invalid token", error);
   }
