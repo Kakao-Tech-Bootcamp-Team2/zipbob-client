@@ -74,4 +74,5 @@ export const StartButton = styled.button`
   position: absolute;
   bottom: 30%;
   right: 5%;
+  cursor: pointer;
 `;

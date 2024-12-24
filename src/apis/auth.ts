@@ -15,16 +15,22 @@ interface NicknameStatusResponse {
 }
 export const patchNewUser = async (nickname: string) => {
   try {
-    const res = await instance.patch("/members/oauth2/join", {
-      nickname,
-    });
+    const res = await instance.patch("/members/oauth2/join", { nickname });
 
+    // 등록 완료 메시지
     console.log(res);
+    alert(`등록 완료: ${nickname}`);
+
+    // 냉장고 데이터 전송
     await postRefrigerators();
-    alert(`등록완료 : ${nickname}`);
-    window.location.href = "/";
+
+    // 성공 시 홈으로 이동
+    window.location.href = "/"; // 또는 useNavigate 사용
   } catch (err) {
-    console.log(err);
+    console.error("Error while patching new user:", err);
+
+    // 사용자에게 에러 피드백
+    alert("등록 중 문제가 발생했습니다. 다시 시도해주세요.");
   }
 };
 
@@ -68,13 +74,12 @@ export const getNicknameStatus = async (
   nickname: string
 ): Promise<NicknameStatusResponse> => {
   try {
-    localStorage.setItem("nickname", nickname);
     const res = await instance.get<NicknameStatusResponse>(
       `/members/nickname-check/${nickname}`
     );
     if (!res.data) {
+      localStorage.setItem("nickname", nickname);
       alert("이용가능합니다!");
-      console.log(res.data);
     }
     return res.data;
   } catch (err) {

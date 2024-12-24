@@ -41,7 +41,7 @@ export const SignUp = () => {
           if (nick) {
             patchNewUser(nickname);
           } else {
-            alert("닉네임이 설정되지 않았습니다."); // null 처리
+            alert("닉네임을 확인해주세요."); // null 처리
           }
         }}
       >
