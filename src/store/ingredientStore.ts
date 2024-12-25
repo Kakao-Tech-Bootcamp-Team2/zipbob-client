@@ -37,9 +37,10 @@ export const useIngredientStore = create<IngredientStore>((set) => ({
   quantities: {},
   expiredDates: {},
 
-  toggleItem: (ingredient) =>
+  toggleItem: (category, ingredient) =>
     set((state) => {
       const isSelected = state.selectedItems.includes(ingredient);
+      console.log(ingredient);
       const today = new Date().toISOString().split("T")[0];
 
       if (isSelected) {
@@ -51,6 +52,7 @@ export const useIngredientStore = create<IngredientStore>((set) => ({
           ),
           quantities: newQuantities,
           expiredDates: newExpiredDates,
+          category: category,
         };
       } else {
         return {
