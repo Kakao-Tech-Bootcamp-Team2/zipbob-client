@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface MenuItemProps {
+  isExpired: boolean; // 유통기한이 지난 항목인지 여부를 나타내는 props
+}
+
 export const Layout = styled.div`
   margin: 1rem 0;
   max-width: 520px;
@@ -78,9 +82,15 @@ export const ItemContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const MenuItem = styled.div`
+export const MenuItem = styled.div<MenuItemProps>`
   display: flex;
   width: 120px;
+
+  /* background-color: ${({ isExpired }) =>
+    isExpired ? "#ffe6e6" : "#f8f8f8"}; */
+  color: ${({ isExpired }) => (isExpired ? "#ff0000" : "#000")};
+  /* border: 1px solid ${({ isExpired }) =>
+    isExpired ? "#ff0000" : "#ccc"}; */
 
   font-family: "BM-HANNA";
   font-size: 1rem;

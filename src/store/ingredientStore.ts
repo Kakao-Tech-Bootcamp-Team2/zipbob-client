@@ -40,16 +40,17 @@ interface IngredientStore {
 
 export const useIngredientStore = create<IngredientStore>((set) => ({
   CATEGORY, // CATEGORY 데이터를 스토어에 포함
-  selectedItems: [],
-  quantities: {},
-  expiredDates: {},
+  selectedItems: [], // 선택된 아이템들
+  quantities: {}, // 선택된 아이템의 수량
+  expiredDates: {}, // 선택된 아이템의 유통기한
 
-  toggleItem: (ingredient) =>
+  toggleItem: (category, ingredient) =>
     set((state) => {
       const isSelected = state.selectedItems.includes(ingredient);
-      const today = new Date().toISOString().split("T")[0];
+      const today = new Date().toISOString().split("T")[0]; // 현재 날짜 (YYYY-MM-DD 형식)
 
       if (isSelected) {
+        // 아이템이 이미 선택되었으면 선택 해제
         const { [ingredient]: _, ...newQuantities } = state.quantities;
         const { [ingredient]: __, ...newExpiredDates } = state.expiredDates;
         return {
@@ -60,6 +61,7 @@ export const useIngredientStore = create<IngredientStore>((set) => ({
           expiredDates: newExpiredDates,
         };
       } else {
+        // 아이템이 선택되지 않았다면 선택 추가
         return {
           selectedItems: [...state.selectedItems, ingredient],
           quantities: { ...state.quantities, [ingredient]: 1 },
@@ -78,16 +80,3 @@ export const useIngredientStore = create<IngredientStore>((set) => ({
       expiredDates: { ...state.expiredDates, [ingredient]: date },
     })),
 }));
-
-// payload 생성
-export const usePayload = () => {
-  const { selectedItems, quantities, expiredDates } = useIngredientStore();
-
-  const payload: PayloadItem[] = selectedItems.map((item) => ({
-    ingredient: item,
-    quantity: quantities[item] || 0,
-    expiredDate: expiredDates[item] || "",
-  }));
-
-  return payload;
-};

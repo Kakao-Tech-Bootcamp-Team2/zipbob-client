@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SelectCard } from "./_components/SelectCard";
 import { useIngredientStore } from "../../store/ingredientStore";
 import { CATEGORY } from "../../constants/category";
+import { postIngredients } from "../../apis/ingredient";
 
 // 유닛 타입 정의
 type UnitType = "COUNT" | "GRAM" | "LITER";
@@ -19,7 +20,9 @@ export const Select = () => {
   const navigate = useNavigate();
   const { selectedItems, quantities, expiredDates } = useIngredientStore();
 
-  const handleEnroll = () => {
+  const handleEnroll = async () => {
+    await postIngredients();
+
     if (selectedItems.length === 0) {
       alert("선택된 항목이 없습니다.");
       return;
@@ -39,7 +42,6 @@ export const Select = () => {
             (categoryItem) => categoryItem.name === item
           )?.unitType
         : "COUNT"; // 기본값 "COUNT"
-
       return {
         ingredient: item,
         quantity: quantities[item] || 0, // 기본값 0

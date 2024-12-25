@@ -57,7 +57,7 @@ interface CategoryProps {
 }
 
 export const IngredientCategory = ({ title, categoryKey }: CategoryProps) => {
-  const { selectedItems, toggleItem } = useIngredientStore(); // Zustand 스토어 사용
+  const { selectedItems, toggleItem } = useIngredientStore(); // Zustand 스토어에서 상태 가져오기
 
   return (
     <Wrapper>
@@ -66,8 +66,11 @@ export const IngredientCategory = ({ title, categoryKey }: CategoryProps) => {
         {Object.values(CATEGORY[categoryKey]).map((ingredient, index) => (
           <IngredientItem
             key={index}
-            $isSelected={selectedItems.includes(ingredient.name)} // 선택 여부 확인
-            onClick={() => toggleItem(categoryKey, ingredient.name)} // categoryKey와 ingredient.name 전달
+            $isSelected={selectedItems.includes(ingredient.name)} // 선택된 상태 확인
+            onClick={() => {
+              toggleItem(categoryKey, ingredient.name); // 선택/해제 동작
+              console.log(ingredient.name);
+            }}
           >
             {ingredient.name}
           </IngredientItem>

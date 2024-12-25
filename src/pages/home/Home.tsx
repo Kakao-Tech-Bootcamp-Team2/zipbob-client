@@ -1,37 +1,56 @@
 import * as S from "./Home.styled";
-import { useExtractTokens } from "../../hooks/useExtractTokens";
-import { useEffect, useState } from "react";
-import { getRefrigerators } from "../../apis/refrigerators";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { CATEGORY_TITLE } from "../../constants/category";
-import { MOCK_REF } from "../../constants/mock";
+import { CATEGORY_TITLE, CATEGORY } from "../../constants/category";
+import { useIngredientStore } from "../../store/ingredientStore";
 
 export const Home = () => {
-  const [data, setData] = useState<string[]>([]);
   const navigate = useNavigate();
-  useExtractTokens();
+  const { selectedItems, quantities, expiredDates } = useIngredientStore();
+
   useEffect(() => {
-    const fetchData = async () => {
-      await getRefrigerators();
-    };
-    setData([...data]);
-    fetchData();
-  }, []);
+    console.log("냉장고 데이터:", selectedItems, quantities, expiredDates);
+  }, [selectedItems, quantities, expiredDates]);
+
   return (
     <S.Layout>
       <S.Title>{`${localStorage.getItem("nickname")}의 냉장고`}</S.Title>
       <S.MenuZone>
-        {data.length > 0 ? (
+        {selectedItems.length > 0 ? (
           <S.MenuBox>
             {CATEGORY_TITLE.map(({ title }, categoryIndex) => (
               <>
                 <S.Label key={categoryIndex}>{title}</S.Label>
-                <S.ItemContainer>
-                  {MOCK_REF[categoryIndex].map((item, itemIndex) => (
-                    <S.MenuItem key={itemIndex}>
-                      {item.name} {item.quantity}
-                    </S.MenuItem>
-                  ))}
+                <S.ItemContainer key={categoryIndex}>
+                  {Object.values(CATEGORY[CATEGORY_TITLE[categoryIndex].key])
+                    .filter((ingredient) =>
+                      selectedItems.includes(ingredient.name)
+                    )
+                    .map((ingredient, itemIndex) => {
+                      const quantity = quantities[ingredient.name] || 0;
+                      const expirationDate =
+                        expiredDates[ingredient.name] || "";
+                      const isExpired =
+                        new Date(expirationDate + 1) < new Date(); // 유통기한 검사
+
+                      // 유닛 타입을 한국어로 변환
+                      const localizedUnit =
+                        ingredient.unitType === "GRAM"
+                          ? "g"
+                          : ingredient.unitType === "LITER"
+                          ? "L"
+                          : ingredient.unitType === "COUNT"
+                          ? "개"
+                          : "";
+
+                      return (
+                        <S.MenuItem key={itemIndex} isExpired={isExpired}>
+                          {ingredient.name} {quantity}
+                          {localizedUnit}
+                          {isExpired && " (유통기한 만료)"}
+                        </S.MenuItem>
+                      );
+                    })}
                 </S.ItemContainer>
               </>
             ))}
