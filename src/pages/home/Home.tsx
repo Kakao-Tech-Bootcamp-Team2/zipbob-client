@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CATEGORY_TITLE, CATEGORY } from "../../constants/category";
 import { useIngredientStore } from "../../store/ingredientStore";
+import { useExtractTokens } from "../../hooks/useExtractTokens";
 
 export const Home = () => {
   const navigate = useNavigate();
+  useExtractTokens();
   const { selectedItems, quantities, expiredDates } = useIngredientStore();
 
   useEffect(() => {
