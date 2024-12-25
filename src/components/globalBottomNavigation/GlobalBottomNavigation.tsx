@@ -23,7 +23,13 @@ export const GlobalBottomNavigation = () => {
       />
       <S.NavigationItem
         src="/images/recipeItem.svg"
-        $isActive={isActive("/recipe")} // "/recipe" 경로 활성화
+        $isActive={
+          isActive("/recipe") ||
+          isActive("/result") ||
+          isActive("/menu") ||
+          isActive("/review") ||
+          isActive("/finish")
+        } // "/recipe" 경로 활성화
         onClick={() => navigate("/recipe")}
       />
       <S.NavigationItem

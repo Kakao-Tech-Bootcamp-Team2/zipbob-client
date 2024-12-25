@@ -10,6 +10,8 @@ import { MyInfo } from "../pages/myinfo/Myinfo";
 import { Error } from "../pages/error/Error";
 import { Recipe } from "../pages/recipe/Recipe";
 import { Loading } from "../pages/loading/Loading";
+import { Result } from "../pages/result/Result";
+import { Menu } from "../pages/menu/Menu";
 
 export const router = createBrowserRouter([
   {
@@ -53,13 +55,17 @@ export const router = createBrowserRouter([
         path: "/recipe",
         element: <Recipe />,
       },
-      // {
-      //   path: "/result",
-      //   element: <Result />
-      // },
+      {
+        path: "/result",
+        element: <Result />,
+      },
       {
         path: "/loading",
         element: <Loading />,
+      },
+      {
+        path: "/menu",
+        element: <Menu />,
       },
     ],
   },
