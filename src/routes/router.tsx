@@ -12,6 +12,7 @@ import { Recipe } from "../pages/recipe/Recipe";
 import { Loading } from "../pages/loading/Loading";
 import { Result } from "../pages/result/Result";
 import { Menu } from "../pages/menu/Menu";
+import { Finish } from "../pages/finish/Finish";
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ export const router = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu />,
+      },
+      {
+        path: "/finish",
+        element: <Finish />,
       },
     ],
   },

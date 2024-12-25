@@ -88,16 +88,18 @@ export const SelectCard = ({ title }: SelectCardProps) => {
           <AmountContainer>
             <SubTitle>용량</SubTitle>
             <CheckZone>
-              <button
-                disabled={currentQuantity < 2}
-                onClick={() => setQuantity(title, currentQuantity - 1)}
-              >
-                -
-              </button>
-              <div>{`${currentQuantity}L/g/개`}</div>
-              <button onClick={() => setQuantity(title, currentQuantity + 1)}>
-                +
-              </button>
+              <input
+                style={{
+                  width: "60px",
+                }}
+                type="text"
+                placeholder="L/g/개"
+                value={currentQuantity + " L/g/개"} // 값 표시
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  const value = e.target.value.replace(/[^\d]/g, ""); // 숫자만 추출
+                  setQuantity(title, Number(value)); // 상태 업데이트
+                }}
+              />
             </CheckZone>
           </AmountContainer>
         </div>

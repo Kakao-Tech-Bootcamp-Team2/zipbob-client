@@ -38,6 +38,7 @@ export const CATEGORY: CategoryType = {
     MANGO: { name: "망고", unitType: "COUNT" },
     LEMON: { name: "레몬", unitType: "COUNT" },
     KIWI: { name: "키위", unitType: "COUNT" },
+    KIMCHI: { name: "김치", unitType: "GRAM" },
     BLUEBERRY: { name: "블루베리", unitType: "GRAM" },
   },
   MEAT: {
@@ -99,7 +100,7 @@ export const CATEGORY: CategoryType = {
 };
 
 export const CATEGORY_TITLE = [
-  { key: "FRUIT_VEGETABLE", title: "야채/과일" },
+  { key: "FRUIT_VEGETABLE", title: "신선식품" },
   { key: "MEAT", title: "육류" },
   { key: "PROCESSED_FOOD", title: "가공식품" },
   { key: "DAIRY", title: "유제품" },

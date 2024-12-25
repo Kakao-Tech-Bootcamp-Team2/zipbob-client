@@ -11,7 +11,7 @@ export const GlobalBottomNavigation = () => {
     <S.Layout>
       <S.NavigationItem
         src="/images/homeItem.svg"
-        $isActive={isActive("/home")} // "/home" 경로 활성화
+        $isActive={isActive("/home") || isActive("/")}
         onClick={() => navigate("/home")}
       />
       <S.NavigationItem
