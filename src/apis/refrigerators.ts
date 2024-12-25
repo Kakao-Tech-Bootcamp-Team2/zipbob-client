@@ -15,7 +15,7 @@ export const postRefrigerators = async () => {
 export const getRefrigerators = async () => {
   try {
     const response = await instance.get("/refrigerators", {
-      data: {
+      params: {
         memberId: parseInt(localStorage.getItem("memberId") || ""),
       },
     });
