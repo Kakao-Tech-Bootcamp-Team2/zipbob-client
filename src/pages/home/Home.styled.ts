@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 interface MenuItemProps {
-  isExpired: boolean; // 유통기한이 지난 항목인지 여부를 나타내는 props
+  $isExpired: boolean; // 유통기한이 지난 항목인지 여부를 나타내는 props
+  $isSelected?: boolean;
 }
 
 export const Layout = styled.div`
@@ -86,12 +87,9 @@ export const MenuItem = styled.div<MenuItemProps>`
   display: flex;
   width: 120px;
 
-  /* background-color: ${({ isExpired }) =>
-    isExpired ? "#ffe6e6" : "#f8f8f8"}; */
-  color: ${({ isExpired }) => (isExpired ? "#ff0000" : "#000")};
-  /* border: 1px solid ${({ isExpired }) =>
-    isExpired ? "#ff0000" : "#ccc"}; */
+  color: ${({ $isExpired }) => ($isExpired ? "#ff0000" : "#000")};
 
+  border: ${({ $isSelected }) => ($isSelected ? "2px solid #2800D8" : "none")};
   font-family: "BM-HANNA";
   font-size: 1rem;
   font-style: normal;

@@ -46,7 +46,7 @@ export const Home = () => {
                           : "";
 
                       return (
-                        <S.MenuItem key={itemIndex} isExpired={isExpired}>
+                        <S.MenuItem key={itemIndex} $isExpired={isExpired}>
                           {ingredient.name} {quantity}
                           {localizedUnit}
                           {isExpired && " (유통기한 만료)"}

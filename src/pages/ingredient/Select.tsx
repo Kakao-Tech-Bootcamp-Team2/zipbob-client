@@ -4,21 +4,11 @@ import { SelectButton } from "../../components/selectButton/SelectButton";
 import { useNavigate } from "react-router-dom";
 import { SelectCard } from "./_components/SelectCard";
 import { useIngredientStore } from "../../store/ingredientStore";
-import { CATEGORY } from "../../constants/category";
 import { postIngredients } from "../../apis/ingredient";
-
-// 유닛 타입 정의
-type UnitType = "COUNT" | "GRAM" | "LITER";
-
-// 각 카테고리의 아이템 타입 정의
-interface CategoryItem {
-  name: string;
-  unitType: UnitType;
-}
 
 export const Select = () => {
   const navigate = useNavigate();
-  const { selectedItems, quantities, expiredDates } = useIngredientStore();
+  const { selectedItems } = useIngredientStore();
 
   const handleEnroll = async () => {
     await postIngredients();
@@ -28,29 +18,6 @@ export const Select = () => {
       return;
     }
 
-    // payload 생성
-    const payload = selectedItems.map((item) => {
-      // CATEGORY에서 unitType 추출
-      const category = Object.values(CATEGORY).find((categoryItems) =>
-        Object.values(categoryItems as Record<string, CategoryItem>).some(
-          (categoryItem) => categoryItem.name === item
-        )
-      );
-
-      const unitType = category
-        ? Object.values(category as Record<string, CategoryItem>).find(
-            (categoryItem) => categoryItem.name === item
-          )?.unitType
-        : "COUNT"; // 기본값 "COUNT"
-      return {
-        ingredient: item,
-        quantity: quantities[item] || 0, // 기본값 0
-        expiredDate: expiredDates[item] || "", // 기본값 빈 문자열
-        unitType, // unitType 추가
-      };
-    });
-
-    alert(`등록 완료: ${JSON.stringify(payload, null, 2)}`);
     navigate("/home");
   };
 

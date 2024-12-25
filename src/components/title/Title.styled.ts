@@ -13,7 +13,7 @@ export const TitleWrapper = styled.div<TitleWrapperProps>`
   position: absolute;
   top: ${({ $top }) => $top || "0px"};
   left: 5%;
-  width: 174px;
+  padding: 1.2rem;
   height: 56px;
   transform: rotate(2deg);
   border: 3px solid #d0d0d0;

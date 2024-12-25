@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export const SelectButton = styled.button`
+interface SelectButtonProps {
+  $isUnder?: boolean;
+}
+
+export const SelectButton = styled.button<SelectButtonProps>`
   position: absolute;
-  top: 5%;
+  top: ${({ $isUnder }) => ($isUnder ? "10%" : "5%")};
   right: -10%;
   width: 150px;
   height: 40px;

@@ -40,12 +40,12 @@ const IngredientItem = styled.div<{ $isSelected: boolean }>`
   font-weight: 400;
   line-height: normal;
   border-radius: 10px;
-  background: ${({ $isSelected }) => ($isSelected ? "#ffc107" : "#e6e6e6")};
+  background: ${({ $isSelected }) => ($isSelected ? "#4160B8" : "#e6e6e6")};
   cursor: pointer;
   transition: background-color 0.2s ease;
 
   &:hover {
-    background: ${({ $isSelected }) => ($isSelected ? "#ffa000" : "#d6d6d6")};
+    background: ${({ $isSelected }) => ($isSelected ? "#4160B8" : "#d6d6d6")};
   }
 `;
 
