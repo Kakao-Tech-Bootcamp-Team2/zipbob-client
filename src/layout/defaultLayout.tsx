@@ -22,9 +22,9 @@ export const DefaultLayout = () => {
   return (
     <Layout>
       <Outlet />
-      {location.pathname !== "/login" && location.pathname !== "/signup" && (
-        <GlobalBottomNavigation />
-      )}
+      {location.pathname !== "/login" &&
+        location.pathname !== "/signup" &&
+        location.pathname !== "/loading" && <GlobalBottomNavigation />}
     </Layout>
   );
 };

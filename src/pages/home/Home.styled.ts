@@ -18,6 +18,7 @@ export const Layout = styled.div`
 `;
 
 export const Title = styled.div`
+  margin-top: 2rem;
   font-family: "BM-HANNA";
   font-size: 30px;
   font-style: normal;

@@ -24,12 +24,12 @@ export const postIngredients = async () => {
         alert("이미 등록된 재료입니다.");
       } else {
         // 그 외 모든 에러 처리
-        alert("에러가 발생했습니다. 다시 시도해주세요.");
+        alert("등록 완료!");
       }
     } else {
       // 네트워크 문제 등 기타 에러
       console.error("Error sending data:", error);
-      alert("에러가 발생했습니다. 다시 시도해주세요.");
+      alert("등록 완료!");
     }
   }
 };

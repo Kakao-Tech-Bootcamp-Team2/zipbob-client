@@ -40,13 +40,11 @@ const IngredientItem = styled.div<{ $isSelected: boolean }>`
   font-weight: 400;
   line-height: normal;
   border-radius: 10px;
-  background: ${({ $isSelected }) => ($isSelected ? "#4160B8" : "#e6e6e6")};
+  background: #f6f8ff;
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  &:hover {
-    background: ${({ $isSelected }) => ($isSelected ? "#4160B8" : "#d6d6d6")};
-  }
+  border: ${({ $isSelected }) => ($isSelected ? "2px solid #2800D8" : "none")};
 `;
 
 type CategoryKeys = keyof typeof CATEGORY; // CATEGORY의 키만 허용
