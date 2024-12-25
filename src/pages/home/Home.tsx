@@ -1,10 +1,10 @@
 import * as S from "./Home.styled";
-// import { useExtractTokens } from "../../hooks/useExtractTokens";
+import { useExtractTokens } from "../../hooks/useExtractTokens";
 import { useEffect } from "react";
 import { getRefrigerators } from "../../apis/refrigerators";
 
 export const Home = () => {
-  // useExtractTokens();
+  useExtractTokens();
   useEffect(() => {
     const fetchData = async () => {
       await getRefrigerators();
